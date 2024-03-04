@@ -1,0 +1,63 @@
+<div class="form">
+  <form>
+    <h1>Organization details:</h1>
+    <div>
+      <label for="id">ID: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="id" value="{{organization?.id}}" disabled>
+    </div>
+    <div>
+      <label for="identifier">Identifier: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="identifier" value="{{organization?.identifier}}" disabled>
+    </div>
+    <div>
+      <label for="name">Name: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="name" value="{{organization?.name}}" disabled>
+    </div>
+    <div>
+      <label for="orgType">Type: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="orgType" value="{{organization?.organizationType?.name}}" disabled>
+    </div>
+    <div>
+      <label for="adress">Address: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="adress" value="{{organization?.adress}}" disabled>
+    </div>
+    <div>
+      <label for="phone">Phone: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="phone" value="{{organization?.phone}}" disabled>
+    </div>
+    <div>
+      <label for="email">Email: </label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="email" value="{{organization?.email}}" disabled>
+    </div>
+    <div>
+      <label for="examCount">Number of examinations:</label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="examCount" value="{{examinationsCount}}" disabled>
+    </div>
+    <div>
+      <label for="examInProgressCount">Number of examinations in progress:</label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="examInProgressCount" value="{{examsInProgressCount}}" disabled>
+    </div>
+    <div>
+      <label for="practitionerCount">Number of practitioners:</label>
+      <br>
+      <input type="text" class="form-control form-control-inline" name="practitionerCount" value="{{practitionersCount}}" disabled>
+    </div>
+    <div class="form-group">
+      <label for="practitionersList">List of practitioners:</label>
+      <br>
+      <textarea class="form-control form-control-inline" name="practitionersList" value="{{practitionersListDisplay}}"  cols="40" rows="3" disabled></textarea>
+    </div>
+    <br>
+  </form>
+</div>
+
+

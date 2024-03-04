@@ -1,0 +1,30 @@
+<div *ngIf="userData">
+<ul ngbNav #nav="ngbNav" class="nav-tabs flex-no-wrap justify-content-between">
+  <li ngbNavItem *ngIf="userData">
+    <a ngbNavLink routerLink="/home">Home</a>
+  </li>
+  <li ngbNavItem *ngIf="userData">
+    <a ngbNavLink routerLink="/organization">Organization</a>
+  </li>
+  <li ngbNavItem *ngIf="userData">
+    <a ngbNavLink routerLink="/practitioner">Practitioner</a>
+  </li>
+  <li ngbNavItem *ngIf="userData">
+    <a ngbNavLink routerLink="/patient">Patient</a>
+  </li>
+  <li ngbNavItem *ngIf="userData">
+    <a ngbNavLink routerLink="/examination">Examination</a>
+  </li>
+  <li ngbNavItem >
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{userData?.name}} {{userData?.surname}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button class="dropdown-item" (click)="logoutUser()">Logout</button>
+      </div>
+    </div>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav"></div>
+</div>

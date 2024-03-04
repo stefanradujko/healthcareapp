@@ -1,0 +1,47 @@
+<div class="filter">
+  <label for="nameFilter">Name:</label>
+  <input class="form-control form-control-inline" type="text" name="nameFilter" [(ngModel)]="nameFilter">
+  <label for="surnameFilter">Surname:</label>
+  <input class="form-control form-control-inline" type="text" name="surnameFilter" [(ngModel)]="surnameFilter">
+  <label for="qualificationFilter">Qualification:</label>
+  <input class="form-control form-control-inline" type="text" name="qualificationFilter" [(ngModel)]="qualificationFilter">
+  <label for="organizationFilter" *ngIf="organizationFilterVisible">Organization:</label>
+  <input class="form-control form-control-inline" type="text" name="organizationFilter" [(ngModel)]="organizationFilter" *ngIf="organizationFilterVisible">
+  <label for="pageSizeFilter">Number of displayed items:</label>
+  <input type="text" class="form-control form-control-inline" name="pageSizeFilter" [(ngModel)]="pageSize">
+  <input type="checkbox" (click)="onUnassignedClick()" class="form-check-input" name="unassigned">
+  <label for="Unassigned">Unassigned</label>
+  <button class="btn btn-success" (click)="onFilterClick()">Filter</button>
+</div>
+<button class="btn btn-outline-success mr-1" (click)="onAddClick()">Add+</button>
+<div class="table">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th sortable="name" (sort)="onSort($event)" scope="col">Name</th>
+    <th sortable="surname" (sort)="onSort($event)" scope="col">Surname</th>
+    <th sortable="qualification" (sort)="onSort($event)"  scope="col">Qualification</th>
+    <th sortable="organization.name" (sort)="onSort($event)"  scope="col">Organization</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let practitioner of practitioners; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ practitioner.name }} </td>
+    <td>{{ practitioner.surname }}</td>
+    <td>{{ practitioner.qualification }}</td>
+    <td>{{ practitioner.organization.name }}</td>
+    <td>
+      <button class="btn btn-outline-success mr-1" (click)="onEditClick(practitioner.id)">Edit</button>
+      <button class="btn btn-outline-success mr-1" (click)="onDetailsClick(practitioner.id)" >Details</button>
+      <button class="btn btn-outline-danger" (click)="onDeleteClick(practitioner)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" (pageChange)="onPageChange($event)" [pageSize]="pageSize" [boundaryLinks]="true" ></ngb-pagination>
+</div>
+</div>

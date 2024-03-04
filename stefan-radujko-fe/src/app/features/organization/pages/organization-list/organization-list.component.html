@@ -1,0 +1,38 @@
+<div class="filter">
+  <label for="nameFilter">Name:</label>
+  <input type="text" class="form-control form-control-inline" name="nameFilter" [(ngModel)]="nameFilter">
+  <label for="orgTypeFilter">Type:</label>
+  <input type="text" class="form-control form-control-inline" name="orgTypeFilter" [(ngModel)]="orgTypeFilter">
+  <label for="pageSizeFilter">Number of displayed items:</label>
+  <input type="text" class="form-control form-control-inline" name="pageSizeFilter" [(ngModel)]="pageSize">
+  <button class="btn btn-success" (click)="onFilterClick()">Filter</button>
+</div>
+<button class="btn btn-outline-success mr-1" (click)="onAddClick()">Add+</button>
+<div class="table">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th sortable="name" (sort)="onSort($event)" scope="col">Name</th>
+    <th sortable="organizationType.name" (sort)="onSort($event)">Type</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let organization of organizations; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{ organization.name }}
+      </td>
+      <td>{{ organization.organizationType.name }}</td>
+      <td>
+        <button class="btn btn-outline-success mr-1" (click)="onEditClick(organization.id)">Edit</button>
+        <button class="btn btn-outline-success mr-1" (click)="onDetailsClick(organization.id)" >Details</button>
+        <button class="btn btn-outline-danger" (click)="onDeleteClick(organization)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" (pageChange)="onPageChange($event)" [pageSize]="pageSize" [boundaryLinks]="true" ></ngb-pagination>
+</div>

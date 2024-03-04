@@ -1,0 +1,60 @@
+<div class="form">
+<form (ngSubmit)="saveOrganization()">
+  <h1>Add organization:</h1>
+  <div class="form-group">
+    <label for="identifier">Identifier: </label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #identifier="ngModel" [class.is-invalid]="identifier.invalid && identifier.touched"
+    name="identifier" [(ngModel)]="organization.identifier" minlength="5">
+    <div *ngIf="identifier.invalid && identifier.touched">
+      <small *ngIf="identifier.errors?.['minlength']" class="text-danger">Identifier must be at least 5 characters</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name">Name: </label>
+    <label for="name" class="text-danger">*</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"
+    name="name" [(ngModel)]="organization.name" required minlength="5">
+    <div *ngIf="name.invalid && name.touched">
+      <small *ngIf="name.errors?.['required']" class="text-danger">Name is required</small>
+      <small *ngIf="name.errors?.['minlength']" class="text-danger">Name must be at least 5 characters</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Organization Type: </label>
+    <label class="text-danger">*</label>
+    <br>
+      <select class="form-select form-control-inline" [(ngModel)]="organization.organizationType.id" name="typeSelect" #orgType="ngModel" required>
+        <option *ngFor="let orgType of orgTypes" [value]="orgType.id" name="orgType" >{{orgType.name}}</option>
+      </select>
+      <div *ngIf="orgType.invalid && orgType.touched">
+        <small *ngIf="orgType.errors?.['required']" class="text-danger">Organization type is required</small>
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="adress">Address:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" name="adress" [(ngModel)]="organization.adress">
+  </div>
+  <div class="form-group">
+    <label for="companyNumber">Phone:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" name="phone" [(ngModel)]="organization.phone">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #email="ngModel"  [class.is-invalid]="email.invalid && email.touched"
+    name="email" [(ngModel)]="organization.email" pattern="[a-z0-9.]+@[a-z0-9.]+">
+    <div *ngIf="email.invalid && email.touched">
+      <small *ngIf="email.errors?.['pattern']" class="text-danger">Email must contain @ character</small>
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <button class="btn btn-success mr-1">Save</button>
+  </div>
+  <br>
+</form>
+</div>

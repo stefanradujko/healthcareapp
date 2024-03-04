@@ -1,0 +1,115 @@
+<div class="form">
+<form (ngSubmit)="savePractitioner()">
+  <h1>Add practitioner:</h1>
+  <div class="form-group">
+    <label for="identifier">Identifier: </label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #identifier="ngModel" [class.is-invalid]="identifier.invalid && identifier.touched"
+    name="identifier" [(ngModel)]="practitioner.identifier" minlength="5">
+    <div *ngIf="identifier.invalid && identifier.touched">
+      <small *ngIf="identifier.errors?.['minlength']" class="text-danger">Identifier must be at least 5 characters</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name">Name: </label>
+    <label for="name" class="text-danger">*</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"
+    name="name" [(ngModel)]="practitioner.name" required minlength="3">
+    <div *ngIf="name.invalid && name.touched">
+      <small *ngIf="name.errors?.['required']" class="text-danger">Name is required</small>
+      <small *ngIf="name.errors?.['minlength']" class="text-danger">Name must be at least 3 characters</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="surname">Surname: </label>
+    <label for="surname" class="text-danger">*</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #surname="ngModel" [class.is-invalid]="surname.invalid && surname.touched"
+    name="surname" [(ngModel)]="practitioner.surname" required minlength="3">
+    <div *ngIf="surname.invalid && surname.touched">
+      <small *ngIf="surname.errors?.['required']" class="text-danger">Surname is required</small>
+      <small *ngIf="surname.errors?.['minlength']" class="text-danger">Surname must be at least 3 characters</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Qualification: </label>
+    <label class="text-danger">*</label>
+    <br>
+      <select class="form-select form-control-inline"[(ngModel)]="practitioner.qualification" name="qualificationSelect" #qualification="ngModel" required>
+        <option value="Doctor of Medicine">Doctor of Medicine</option>
+        <option value="Medical Assistant">Medical Assistant</option>
+        <option value="Nurse Practitioner">Nurse Practitioner</option>
+        <option value="Doctor of Pharmacy">Doctor of Pharmacy</option>
+        <option value="Certified Nurse Midwife">Certified Nurse Midwife</option>
+        <option value="Emergency Medical Tehnician">Emergency Medical Tehnician</option>
+      </select>
+      <div *ngIf="qualification.invalid && qualification.touched">
+        <small *ngIf="qualification.errors?.['required']" class="text-danger">Qualification is required</small>
+      </div>
+  </div>
+  <div class="form-group">
+    <label>Organization: </label>
+    <label class="text-danger">*</label>
+    <br>
+      <select class="form-select form-control-inline" [(ngModel)]="practitioner.organization" name="orgSelect" #organization="ngModel" required>
+        <option *ngFor="let organization of organizations" [value]="organization.id" name="organization" >{{organization.name}}</option>
+      </select>
+      <div *ngIf="organization.invalid && organization.touched">
+        <small *ngIf="organization.errors?.['required']" class="text-danger">Organization is required</small>
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="birthDate">Birth date: </label>
+    <label for="birthDate" class="text-danger">*</label>
+    <br>
+    <input type="date" class="form-control form-control-inline" #birthDate="ngModel" [class.is-invalid]="birthDate.invalid && birthDate.touched"
+    name="birthDate" [(ngModel)]="practitioner.birthDate" required>
+    <div *ngIf="birthDate.invalid && birthDate.touched">
+      <small *ngIf="name.errors?.['required']" class="text-danger">Birth date is required</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Gender: </label>
+    <br>
+      <select class="form-select form-control-inline"[(ngModel)]="practitioner.gender" name="genderSelect">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Unknown">Unknown</option>
+      </select>
+  </div>
+  <div class="form-group">
+    <label for="adress">Address:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" name="adress" [(ngModel)]="practitioner.adress">
+  </div>
+  <div class="form-group">
+    <label for="companyNumber">Phone:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" name="phone" [(ngModel)]="practitioner.phone">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #email="ngModel"  [class.is-invalid]="email.invalid && email.touched"
+    name="email" [(ngModel)]="practitioner.email" pattern="[a-z0-9.]+@[a-z0-9.]+">
+    <div *ngIf="email.invalid && email.touched">
+      <small *ngIf="email.errors?.['pattern']" class="text-danger">Email must contain @ character</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #username="ngModel" name="username" [(ngModel)]="practitioner.username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <br>
+    <input type="password" class="form-control form-control-inline" #username="ngModel" name="password" [(ngModel)]="practitioner.password">
+  </div>
+  <br>
+  <div class="form-group">
+    <button class="btn btn-success mr-1">Save</button>
+  </div>
+</form>
+</div>

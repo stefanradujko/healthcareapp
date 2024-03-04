@@ -1,0 +1,8 @@
+.card{
+  text-align: center;
+  transform: .2s;
+}
+
+.card:hover{
+  transform: scale(1.1);
+}

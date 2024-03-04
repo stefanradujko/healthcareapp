@@ -1,0 +1,122 @@
+<div class="form">
+<form>
+  <h1>Edit examination:</h1>
+  <div class="form-group">
+    <label for="identifier">Identifier: </label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #identifier="ngModel" [class.is-invalid]="identifier.invalid && identifier.touched"
+    name="identifier" [(ngModel)]="examination.identifier" minlength="5">
+    <div *ngIf="identifier.invalid && identifier.touched">
+      <small *ngIf="identifier.errors?.['minlength']" class="text-danger">Identifier must be at least 5 characters</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="practitioner">Patient:</label>
+    <label for="practitioner" class="text-danger">*</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #patient ="ngModel" [class.is-invalid]="patient.invalid && patient.touched && examination.patient.name == null"
+    name="patient" [(ngModel)]="patientNameSurname" pattern="[A-Z][a-z]+ [A-Z][a-z]+" required>
+    <div *ngIf="patient.invalid && patient.touched && examination.patient.name == null">
+      <small *ngIf="patient.errors?.['required']" class="text-danger">Patient is required</small>
+      <small *ngIf="patient.errors?.['pattern']" class="text-danger">Patient's name must be in form "Name Surname" and have starting capital letters!</small>
+    </div>
+    <br>
+    <button class="btn btn-success mr-1" (click)="findPatientClick()">Set patient</button>
+  </div>
+  <div class="form-group">
+    <label for="org">Organization:</label>
+    <label for="org" class="text-danger">*</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #org="ngModel" [class.is-invalid]="org.invalid && org.touched && examination.organization.name == null"
+    name="org" [(ngModel)]="examination.organization.name" required>
+    <div *ngIf="org.invalid && org.touched && examination.organization.name == null">
+      <small *ngIf="org.errors?.['required']" class="text-danger">Organization is required</small>
+    </div>
+    <br>
+    <button class="btn btn-success mr-1" (click)="findOrganizationClick()">Set organization</button>
+  </div>
+  <div class="form-group">
+    <label for="practitioner">Practitioner:</label>
+    <label for="practitioner" class="text-danger">*</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" #practitioner ="ngModel" [class.is-invalid]="practitioner.invalid && practitioner.touched && examinationPractitioners!.length == 0"
+    name="practitioner" [(ngModel)]="practitionerNameSurname" pattern="[A-Z][a-z]+ [A-Z][a-z]+" required>
+    <div *ngIf="practitioner.invalid && practitioner.touched && examinationPractitioners!.length == 0">
+      <small *ngIf="practitioner.errors?.['required']" class="text-danger">Practitioner is required</small>
+      <small *ngIf="practitioner.errors?.['pattern']" class="text-danger">Practitioner's name must be in form "Name Surname" and have starting capital letters!</small>
+    </div>
+    <br>
+    <button class="btn btn-success mr-1" (click)="findPractitionerClick()">Add practitioner</button>
+    <br>
+    <br>
+    <button class="btn btn-success mr-1" (click)="deleteFromList()">Delete from list</button>
+  </div>
+  <div class="form-group">
+    <label for="practitionersList">List of practitioners:</label>
+    <br>
+    <textarea class="form-control form-control-inline" name="practitionersList" [(ngModel)]="practitionersListDisplay"  cols="40" rows="3" disabled></textarea>
+  </div>
+  <div class="form-group">
+    <label>Status: </label>
+    <label class="text-danger">*</label>
+    <br>
+      <select class="form-select form-control-inline" [(ngModel)]="examination.status" name="statusSelect"
+      #status="ngModel" [class.is-invalid]="status.invalid && status.touched" required>
+        <option value="planned">planned</option>
+        <option value="triaged">triaged</option>
+        <option value="in-progress">in-progress</option>
+        <option value="finished">finished</option>
+        <option value="cancelled">cancelled</option>
+      </select>
+      <div *ngIf="status.invalid && status.touched">
+        <small *ngIf="status.errors?.['required']" class="text-danger">Status is required</small>
+      </div>
+  </div>
+  <div class="form-group">
+    <label>Service Type: </label>
+    <label class="text-danger">*</label>
+    <br>
+      <select class="form-select form-control-inline" [(ngModel)]="examination.serviceType.id" name="typeSelect"
+      #serviceType="ngModel"  [class.is-invalid]="serviceType.invalid && serviceType.touched" required>
+        <option *ngFor="let serviceType of serviceTypes" [value]="serviceType.id" name="serviceType" >{{serviceType.name}}</option>
+      </select>
+      <div *ngIf="serviceType.invalid && serviceType.touched">
+        <small *ngIf="serviceType.errors?.['required']" class="text-danger">Service type is required</small>
+      </div>
+  </div>
+  <div class="form-group">
+    <label>Priority: </label>
+    <br>
+      <select class="form-select form-control-inline" [(ngModel)]="examination.priority" name="prioritySelect">
+        <option value="asap">asap</option>
+        <option value="callback results">callback results</option>
+        <option value="emergency">emergency</option>
+        <option value="routine">routine</option>
+        <option value="rush reporting">rush reporting</option>
+        <option value="timing critical">timing critical</option>
+      </select>
+  </div>
+  <div class="form-group">
+    <label for="startDate">Start date: </label>
+    <br>
+    <input type="date" class="form-control form-control-inline" name="startDate" [(ngModel)]="examination.startDate">
+  </div>
+  <div class="form-group">
+    <label for="endDate">End date: </label>
+    <br>
+    <input type="date" class="form-control form-control-inline" name="endDate" [(ngModel)]="examination.endDate">
+  </div>
+  <div class="form-group">
+    <label for="diagnosis">Diagnosis:</label>
+    <br>
+    <input type="text" class="form-control form-control-inline" name="diagnosis" [(ngModel)]="examination.diagnosis">
+  </div>
+  <br>
+  <div class="form-group">
+    <button (click)="editExamination()" class="btn btn-success mr-1">Update</button>
+  </div>
+  <br>
+</form>
+</div>
+
+

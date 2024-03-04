@@ -1,0 +1,41 @@
+<div class="form">
+  <form>
+    <h1>Examination details:</h1>
+<div>
+  <label for="identifier">Identifier:</label>
+  <br>
+  <input class="form-control form-control-inline" type="text" name="identifier" value="{{examination.identifier}}" disabled>
+</div>
+<div>
+  <label for="patient">Patient:</label>
+  <br>
+  <input class="form-control form-control-inline" type="text" name="patient" value="{{examination.patient.name}} {{examination.patient.surname}}" disabled>
+</div>
+<div>
+  <label for="organization">Organization:</label>
+  <br>
+  <input class="form-control form-control-inline" type="text" name="organization" value="{{examination.organization.name}}" disabled>
+</div>
+<div>
+  <label for="practList">Practitioners:</label>
+  <br>
+  <textarea class="form-control form-control-inline" name="practList" cols="40" rows="3"  [value]="practitioners" disabled></textarea>
+</div>
+<div>
+  <label for="status">Status:</label>
+  <br>
+  <input class="form-control form-control-inline" type="text" name="status" value="{{examination.status}}" disabled>
+</div>
+<div>
+  <label for="priority">Priority:</label>
+  <br>
+  <input class="form-control form-control-inline"  type="text" name="priority" value="{{examination.priority}}" disabled>
+</div>
+<div>
+  <label for="diagnosis">Diagnosis:</label>
+  <br>
+  <input class="form-control form-control-inline" type="text" name="diagnosis" value="{{examination.diagnosis}}" disabled>
+</div>
+<br>
+</form>
+</div>
